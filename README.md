@@ -18,6 +18,13 @@
 <p>python app.py</p>
 </blockquote>
 <h2 id="application">Application</h2>
+<h3 id="0-tech-stack-and-libraries--apis-used">0. Tech Stack and Libraries / APIs used</h3>
+<ul>
+<li>Flask with Python</li>
+<li>PyMuPDF</li>
+<li>python docx</li>
+<li>GenAI ( Google Gemini API)</li>
+</ul>
 <h3 id="1-application-framework">1. Application Framework</h3>
 <p>Flask was used as the backend framework, and HTML/CSS was used for the frontend.
 The functionality to upload the file was created here</p>
