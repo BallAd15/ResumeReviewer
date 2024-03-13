@@ -41,7 +41,7 @@ The functionality to upload the file was created here</p>
 </li>
 </ul>
 <h3 id="3-generate-feedback">3. Generate Feedback</h3>
-<p>The extracted text was fed to the Google Gemini API, (GenAI) to receive a feedback.</p>
+<p>The extracted text was fed to the Google Gemini API, (GenAI) to receive a feedback. The API key received is stored as an environment variable.</p>
 <ul>
 <li>The Google Gemini API (GenAI) provides powerful natural language processing (NLP) capabilities that can significantly enhance the resume review process.</li>
 <li>These include Semantic Understanding, Keyword Extraction, Sentiment Analysis, Clarity Assessment</li>
