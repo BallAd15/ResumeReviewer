@@ -1,0 +1,63 @@
+body{
+    background-color: #e6e8ee;
+}
+
+.h1_index{
+    font-size: 3em;
+}
+
+.main-div{
+    border: 1px black;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+}
+
+.byline-div{
+    margin: 0 auto;
+    color: #5d5f63;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+button{
+    margin-top: 1em;
+}
+
+button {
+    display: inline-block;
+    padding: 0.4em 0.8em;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    text-decoration: none;
+    background-color: #5172FE;
+    border: none;
+    border-radius: 0.6em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #122b9c;
+  }
+
+
+/* ======================================================== */
+/* Feedback Page */
+.main-div-2{
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+}
+
+.feedback-div{
+    border: 1px solid black;
+    background-color: #5d5f63;
+    color: white;
+    border-radius: 0.7em;
+    text-align: left;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}

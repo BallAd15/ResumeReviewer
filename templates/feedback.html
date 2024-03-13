@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Feedback</title>
+{% endblock %}
+
+{% block body %}
+<div class="main-div-2">
+    <h1 class="h1-index">Here's your feedback</h1>
+    <!-- <span>{{ feedback }}</span> -->
+    <div class="feedback-div">
+        <br>
+        {% for line in feedback.splitlines() %}
+            <span>{{ line }}</span>
+            <br> <!-- Add spacing between lines -->
+        {% endfor %}
+        <br>
+    </div>
+
+</div>
+{% endblock %}

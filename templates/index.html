@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Resume Reviewer</title>
+{% endblock %}
+
+{% block body %}
+<div class="main-div">
+
+    <h1 class="h1-index">Resume Reviewer</h1>
+
+    <div class="byline-div">
+        <span class="byline">
+            Upload your resume in <span style="font-weight: bold;">pdf/doc</span> format, and we'll review it for you!
+        </span>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label for="resume">Upload Resume: </label>
+        <input type="file" name="resume" id="resume" required>
+        <br>
+        <button type="submit">Upload</button>
+    </form>
+
+</div>
+{% endblock %}
