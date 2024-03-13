@@ -10,11 +10,19 @@
     <!-- <span>{{ feedback }}</span> -->
     <div class="feedback-div">
         <br>
-        {% for line in feedback.splitlines() %}
-            <span>{{ line }}</span>
-            <br> <!-- Add spacing between lines -->
+        {% for category, feedback_list in feedback.items() %}
+            <h2 class="feedback-title">{{ category }}</h2>
+            <ul>
+                {% for item in feedback_list %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
         {% endfor %}
         <br>
+    </div>
+
+    <div class="return-div">
+        <a class="return-a" href="{{ url_for('index') }}">Upload another file</a>
     </div>
 
 </div>

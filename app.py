@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect
-import openai
+import google.generativeai as genai
 import fitz  # PyMuPDF
 from docx import Document
 import logging
@@ -10,7 +10,7 @@ load_dotenv()  # Load environment variables from .env file
 
 logging.basicConfig(level=logging.ERROR)
 
-openai.api_key = os.getenv("API_KEY")
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = Flask(__name__) # Just referencing this file
 
@@ -22,9 +22,11 @@ def index():
     filename = resume_file.filename
     file_format = filename.rsplit('.', 1)[-1].lower()  # Extract the file extension and convert to lowercase
     resume_text = extract_text(resume_file, file_format)
-    #return render_template('feedback.html', feedback=resume_text)
-    chatgpt_feedback = generateFeedback(resume_text)
-    return chatgpt_feedback
+    gemini_feedback = generateFeedback(resume_text)
+
+    formatted_feedback = format_response(gemini_feedback)
+
+    return render_template('feedback.html', feedback=formatted_feedback)
 
   else:
     # Render the HTML form
@@ -64,20 +66,58 @@ def extract_text_from_doc(resume_file):
 
 def generateFeedback(resume_text):
     prompt = f"This is a resume for a Software Development Engineer position. Please provide feedback on clarity, keyword optimization, and tailoring to the role. \n {resume_text}"
-    try:
-      response = openai.Completion.create(
-          engine="gpt-3.5-turbo-instruct",  # Adjust engine as needed
-          prompt=prompt,
-          max_tokens=1024,  # Adjust maximum response length
-          n=1,
-          stop=None,
-          temperature=0.7,  # Adjust temperature for creativity
-      )
-      chatgpt_feedback = response.choices[0].text.strip()
-      return f"Resume uploaded successfully! Feedback from ChatGPT: {chatgpt_feedback}"
-    except openai.APIError as e:
-      # Handle potential errors during API interaction
-      return f"An error occurred: {e}"
+    # Set up the model
+    generation_config = {
+    "temperature": 0.9,
+    "top_p": 1,
+    "top_k": 1,
+    "max_output_tokens": 2048,
+    }
+
+    safety_settings = [
+    {
+        "category": "HARM_CATEGORY_HARASSMENT",
+        "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+        "category": "HARM_CATEGORY_HATE_SPEECH",
+        "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+        "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+        "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    ]
+
+    model = genai.GenerativeModel(model_name="gemini-1.0-pro",
+                                generation_config=generation_config,
+                                safety_settings=safety_settings)
+    
+    convo = model.start_chat()
+
+    convo.send_message(prompt)
+
+    feedback = convo.last.text
+    return feedback
+
+def format_response(input_text):
+    feedback_dict = {}
+    current_category = None
+
+    lines = input_text.split("\n")
+    for line in lines:
+            if line == '':
+                    pass
+            elif line.startswith("**"):
+                    feedback_dict[line[2:-2]] = []
+                    current_category = line[2:-2]
+            else:
+                    feedback_dict[current_category].append(line[1:].replace("*",""))    
+    return feedback_dict
     
 if __name__ == "__main__":
     app.run(debug=True) # debug=True so that if there are any errors, we can see them on the webpage
