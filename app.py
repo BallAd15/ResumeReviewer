@@ -3,10 +3,14 @@ import openai
 import fitz  # PyMuPDF
 from docx import Document
 import logging
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env file
 
 logging.basicConfig(level=logging.ERROR)
 
-openai.api_key = "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"
+openai.api_key = os.getenv("API_KEY")
 
 app = Flask(__name__) # Just referencing this file
 
