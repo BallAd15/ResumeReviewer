@@ -3,7 +3,7 @@
 <h2 id="setup">Setup</h2>
 <p>Clone the repository</p>
 <blockquote>
-<p>git clone <a href="https://github.com/BallAd15/ResumeReviewer">https://github.com/BallAd15/ResumeReviewer</a></p>
+<p>git clone https://github.com/BallAd15/ResumeReviewer</p>
 </blockquote>
 <p>Fetch an API Key, and store in a .env file</p>
 <blockquote>
