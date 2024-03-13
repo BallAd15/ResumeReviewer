@@ -48,3 +48,7 @@ The functionality to upload the file was created here</p>
 </ul>
 <h3 id="4-formatting-the-response">4. Formatting the Response</h3>
 <p>The response received from GenAI isn&#39;t in a format which can be displayed easily on a webpage. Hence various parsing techniques were used, so it&#39;s easier for the flask template engine, Jinja to render the page</p>
+
+![image](https://github.com/BallAd15/ResumeReviewer/assets/61866962/ced4377c-9e3c-498e-aaf4-02c1786d61d2)
+
+![image](https://github.com/BallAd15/ResumeReviewer/assets/61866962/3072f1f5-3c59-4e84-8e4c-110766184b4a)
